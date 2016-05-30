@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 sudo apt-get update
-sudo apt-get install -y python-setuptools python-dev build-essential git libssl-dev libffi-dev sshpass
+sudo apt-get install -y python-setuptools python-dev build-essential git libssl-dev libffi-dev sshpass lxc
 sudo easy_install pip 
 wget https://bootstrap.pypa.io/ez_setup.py -O - | sudo python
 
