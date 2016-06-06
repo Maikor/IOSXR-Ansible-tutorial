@@ -6,8 +6,12 @@ sudo easy_install pip
 wget https://bootstrap.pypa.io/ez_setup.py -O - | sudo python
 
 
-git clone -b vagrant http://gitlab.cisco.com/mkorshun/iosxr-ansible.git
+git clone https://github.com/ios-xr/iosxr-ansible.git
 git clone git://github.com/ansible/ansible.git --recursive
+
+mv ~/ansible_hosts  /home/vagrant/iosxr-ansible/remote/ansible_hosts
+mv ~/ansible_env  /home/vagrant/iosxr-ansible/remote/ansible_env
+
 
 cd ansible/ && sudo python setup.py install
 echo "source /home/vagrant/iosxr-ansible/remote/ansible_env" >> /home/vagrant/.profile
