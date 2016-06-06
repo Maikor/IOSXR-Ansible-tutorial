@@ -1,0 +1,27 @@
+---
+- hosts: ss-xr
+
+  tasks:
+  - copy: src=/home/vagrant/cn.xml dest=/home/vagrant/cn.xml owner=vagrant
+
+  - name: Creates directory
+    file: path=/misc/app_host/rootfs state=directory
+    become: yes
+
+  - command: tar -zxf /home/vagrant/cn_rootfs.tar.gz -C /misc/app_host/rootfs
+    become: yes
+    register: output
+    ignore_errors: yes
+  - debug: var=output.stdout_lines
+
+  - command: nsenter -t 1 -n -- /usr/bin/virsh -c lxc+tcp://192.0.0.1:16509 create /home/vagrant/cn.xml
+    register: output
+    become: yes
+  - debug: var=output.stdout_lines
+
+  - command: nsenter -t 1 -n -- /usr/bin/virsh -c lxc+tcp://192.0.0.1:16509 list
+    become: yes
+    register: output
+  - debug: var=output.stdout_lines
+
+
