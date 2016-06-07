@@ -14,13 +14,15 @@
     ignore_errors: yes
   - debug: var=output.stdout_lines
 
-  - command: nsenter -t 1 -n -- /usr/bin/virsh -c lxc+tcp://192.0.0.1:16509 create /home/vagrant/cn.xml
+  - shell: sudo -i virsh  create /home/vagrant/cn.xml
+    args:
+      warn: no
     register: output
-    become: yes
   - debug: var=output.stdout_lines
 
-  - command: nsenter -t 1 -n -- /usr/bin/virsh -c lxc+tcp://192.0.0.1:16509 list
-    become: yes
+  - shell: sudo -i virsh list
+    args:
+      warn: no
     register: output
   - debug: var=output.stdout_lines
 
