@@ -5,10 +5,9 @@
   - copy: src=/home/vagrant/cn.xml dest=/home/vagrant/cn.xml owner=vagrant
 
   - name: Creates directory
-    file: path=/misc/app_host/rootfs state=directory
-    become: yes
+    file: path=/misc/app_host/scratch/rootfs state=directory
 
-  - command: tar -zxf /home/vagrant/cn_rootfs.tar.gz -C /misc/app_host/rootfs
+  - command: tar -zxf /misc/app_host/scratch/cn_rootfs.tar.gz -C /misc/app_host/scratch/rootfs
     become: yes
     register: output
     ignore_errors: yes
@@ -25,5 +24,3 @@
       warn: no
     register: output
   - debug: var=output.stdout_lines
-
-
